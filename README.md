@@ -1,4 +1,1 @@
-librouteros-docs
-================
-
-Documentation for librouteros
+[Documentation for librouteros](http://librouteros.readthedocs.org/en/)

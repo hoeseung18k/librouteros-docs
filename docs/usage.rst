@@ -1,21 +1,11 @@
 Library usage
 =============
 
-First of all import basic function to make connection.
 ::
 
     from librouteros import connect
-    conn = connect( '127.0.0.1' )
-
-This function will try to connect to specified device. You can specify FQDN, ipv4/ipv6 address. If everything went fine it will return a connection class.
-
-Logging in
-----------
-
-After connecting to a device you need to login to be able to issue commands. If you do not have any password just leave it as empty string.
-::
-
-    api = conn.login( 'username', 'password' )
+    conn = connect( '1.1.1.1', 'admin' )
+    api = conn.api()
 
 Type casting
 ------------
@@ -28,20 +18,16 @@ Library automaticly casts values to/from python equivalents. Table below specifi
     "False", "no/false"
     "True", "yes/true"
     "None", "''"
-    "int",  "'int'"
+    "123",  "'1234'"
 
 Any type not specified in table above is converted to str.
-Keys that starts with ``=.`` or ``.`` are converted to uppercase.
 
 Printing elements
 -----------------
 
 ::
 
-    api.getall( '/system/logging/action' )
-
-Result may contain 0 or more elements.
-::
+    api.talk( '/system/logging/action/print' )
 
     ({'ID': '*0',
     'default': True,
@@ -73,12 +59,13 @@ Result may contain 0 or more elements.
     'syslog-time-format': 'bsd-syslog',
     'target': 'remote'})
 
-You may get additional information such as stats.
+
+
+Printing additional information such as stats.
 ::
 
-    api.getall( '/interface/ethernet', args={'stats':True} )
+    api.talk( '/interface/ethernet/print', args={'stats':True} )
 
-    (...... ,
     {'ID': '*1',
     'arp': 'enabled',
     'auto-negotiation': True,
@@ -137,43 +124,22 @@ You may get additional information such as stats.
     'tx-single-collision': 0,
     'tx-too-long': 0,
     'tx-underrun': 0},
-    ..... )
 
 Adding element
 --------------
 
-When adding element api always returns newly created ID. You can reference element with this ID.
 ::
 
     data = { 'interface':'ether1', 'address':'172.31.31.1/24' }
-    api.add( '/ip/address', data )
+    ID = api.talk( '/ip/address/add', data )
+    # get newly created ID
+    ID[0]['ret']
     '*23'
 
 Removing element
 ----------------
 
-You can remove multiple elements. Always refer to them with ID.
 ::
 
-    idlist = ( '*12', '*1' )
-    api.remove( '/ip/address', idlist )
-
-Removing single element.
-::
-
-    api.remove( '/ip/address', '*33' )
-
-Setting element
----------------
-
-Some menu levels do not have ID. For example ``/system ntp client`` is a single element menu.
-::
-
-    data = { 'primary-ntp':'1.1.1.1', 'secondary-ntp':'2.2.2.2', 'enabled':True }
-    api.set( '/system/ntp/client', data )
-
-Referencing particular ID.
-::
-
-    data = { 'interface':'ether10', 'ID':'*33' }
-    api.set( '/ip/address', data )
+    idlist = ','.join( '*12', '*1' )
+    api.talk( '/ip/address/remove', {'ID':idlist} )

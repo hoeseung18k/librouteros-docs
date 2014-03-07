@@ -15,14 +15,20 @@ Limitations
 
 * No support for sentence tagging.
 * No asynchronous support for reading/writing
+* No TLS/SSL socket encryption
+* No Diffie Hellman negotiation
 
-Dependencies
+Requirements
 ------------
 
-* Python 3.x
-* Mock 1.0.1 ( for runing unit tests ) or higher
+* At least Python 3.2 or newer.
+* Mock 1.0.1 ( for runing unit tests ) or higher.
+* nosetests3 for runing unit tests.
 
 Unit tests
 ----------
 
-This library comes with unit tests included. To run them either discover them with nose or run separately.
+This library comes with unit tests included. To run them:
+::
+
+    nosetests3 unit_tests/*
