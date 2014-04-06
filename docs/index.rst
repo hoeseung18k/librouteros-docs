@@ -14,7 +14,7 @@ Contents:
     introduction
     usage
     api_analysis
-
+    license
 
 Indices and tables
 ==================
