@@ -16,7 +16,7 @@ Library automaticly casts values to/from python equivalents. Table below specifi
     "False", "no/false"
     "True", "yes/true"
     "None", "''"
-    "123",  "'1234'"
+    "123",  "'123'"
 
 Any type not specified in table above is converted to str.
 
