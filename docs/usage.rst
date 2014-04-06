@@ -32,7 +32,7 @@ Basic usage
     api = connect( '1.1.1.1', 'admin', 'password' )
     addresses = api.run('/ip/address/print')
     # close the connestion
-    conn.close()
+    api.close()
 
 
 Printing elements
