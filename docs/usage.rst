@@ -1,11 +1,9 @@
 Library usage
 =============
 
-::
+.. note::
 
-    from librouteros import connect
-    conn = connect( '1.1.1.1', 'admin' )
-    api = conn.api()
+    This library comes with built in documentation. Run ``help(method)`` to get the docs.
 
 Type casting
 ------------
