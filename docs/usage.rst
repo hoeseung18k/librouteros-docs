@@ -20,12 +20,27 @@ Library automaticly casts values to/from python equivalents. Table below specifi
 
 Any type not specified in table above is converted to str.
 
+Key names are also converted. All api attribute words that start with ``=.`` are converted to uppercase. For example ``=.id=*4`` will be converted to ``{ 'ID': '*4' }``. All uppercase dictionary keys will be converted to lowercase and a ``=.`` will be prefixed.
+
+Basic usage
+-----------
+
+::
+
+    from librouteros import connect
+
+    api = connect( '1.1.1.1', 'admin', 'password' )
+    addresses = api.run('/ip/address/print')
+    # close the connestion
+    conn.close()
+
+
 Printing elements
 -----------------
 
 ::
 
-    api.talk( '/system/logging/action/print' )
+    api.run( '/system/logging/action/print' )
 
     ({'ID': '*0',
     'default': True,
@@ -62,7 +77,7 @@ Printing elements
 Printing additional information such as stats.
 ::
 
-    api.talk( '/interface/ethernet/print', args={'stats':True} )
+    api.run( '/interface/ethernet/print', args={'stats':True} )
 
     {'ID': '*1',
     'arp': 'enabled',
@@ -129,7 +144,7 @@ Adding element
 ::
 
     data = { 'interface':'ether1', 'address':'172.31.31.1/24' }
-    ID = api.talk( '/ip/address/add', data )
+    ID = api.run( '/ip/address/add', data )
     # get newly created ID
     ID[0]['ret']
     '*23'
@@ -140,4 +155,4 @@ Removing element
 ::
 
     idlist = ','.join( '*12', '*1' )
-    api.talk( '/ip/address/remove', {'ID':idlist} )
+    api.run( '/ip/address/remove', {'ID':idlist} )
