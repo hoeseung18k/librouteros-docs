@@ -89,3 +89,85 @@ Adding element
     ---> !done
     ---> =ret=*3
     ---> EOS
+
+-----------------------
+Multiple error messages
+-----------------------
+.. code-block:: none
+
+    <--- '/ip/aasasa/p'
+    <--- EOS
+    ---> '!trap'
+    ---> '=category=0'
+    ---> '=message=no such command or directory (aasasa)'
+    ---> EOS
+    ---> '!trap'
+    ---> '=message=no such command prefix'
+    ---> EOS
+    ---> '!done'
+    ---> EOS
+
+--------------
+Print with tag
+--------------
+.. code-block:: none
+
+    <--- /ip/address/print
+    <--- .tag=2
+    <--- EOS
+    ---> !re
+    ---> =.id=*1
+    ---> =address=172.30.30.1/24
+    ---> =network=172.30.30.0
+    ---> =interface=bridge1
+    ---> =actual-interface=bridge1
+    ---> =invalid=false
+    ---> =dynamic=false
+    ---> =disabled=false
+    ---> .tag=2
+    ---> EOS
+    ---> !re
+    ---> =.id=*7
+    ---> =address=10.10.10.1/24
+    ---> =network=10.10.10.0
+    ---> =interface=ether5
+    ---> =actual-interface=ether5
+    ---> =invalid=false
+    ---> =dynamic=true
+    ---> =disabled=false
+    ---> .tag=2
+    ---> EOS
+    ---> !done
+    ---> .tag=2
+    ---> EOS
+
+-------------
+Query example
+-------------
+
+Print all interfaces that are of type ether OR vlan OR bridge AND not disabled AND not slave. Return only key ``name``
+
+.. code-block:: none
+
+    <--- '/interface/print'
+    <--- '=.proplist=name'
+    <--- '?-slave'
+    <--- '?=disabled=no'
+    <--- '?=type=bridge'
+    <--- '?=type=ether'
+    <--- '?=type=vlan'
+    <--- '?#|'
+    <--- '?#|'
+    <--- '?#&'
+    <--- '?#&'
+    <--- EOS
+    ---> '!re'
+    ---> '=name=ether1'
+    ---> EOS
+    ---> '!re'
+    ---> '=name=ether2'
+    ---> EOS
+    ---> '!done'
+    ---> EOS
+
+
