@@ -8,9 +8,9 @@ Extras
 Comparison functions
 ____________________
 
-.. function:: dictdiff(wanted, present, split_keys=tuple(), split_char=',')
+.. py:function:: dictdiff(wanted, present, split_keys=tuple(), split_char=',')
 
-    Compare two dictionaries and return items from *wanted* not listed in *present*. If *split_keys* is provided, additional comparison is made based on provided keys.
+    Compare two dictionaries and return items from *wanted* not listed in *present*. If *split_keys* is provided, additional comparison is made based on provided keys, witch will execute :py:func:`strdiff` for every split_key.
 
     :param dict wanted: Desired items.
     :param dict present: Present items.
@@ -30,7 +30,7 @@ ____________________
     .. versionadded:: 1.1
 
 
-.. function:: strdiff(welem, pelem, splchr)
+.. py:function:: strdiff(welem, pelem, splchr)
 
     Compare two strings and return items from *welem* not present in *pelem*. Items from *pelem*, *welem* are splitted by *splchr* and compared. Returns (unordered) string joined by *splchr*.
 
