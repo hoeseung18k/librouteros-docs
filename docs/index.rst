@@ -13,6 +13,7 @@ Contents:
 
     introduction
     usage
+    refguide
     api_analysis
     license
 
