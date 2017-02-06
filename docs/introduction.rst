@@ -21,7 +21,8 @@ Limitations
 Requirements
 ------------
 
-* At least Python 3.2 or newer.
+* Python 2 or 3, with sufficiently recent versions of `pip` and `setuptools`
+  * Verified working with `setuptools` version `34.1.1` and `pip` version `9.0.1`
 * Mock 1.0.1 ( for runing unit tests ) or higher.
 * nosetests3 for runing unit tests.
 
